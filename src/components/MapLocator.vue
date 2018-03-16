@@ -4,7 +4,7 @@ div.crosshairs
 
 <script>
 import L from 'leaflet'
-import esri from 'esri-leaflet'
+import * as esri from 'esri-leaflet'
 import 'leaflet-easybutton'
 
 export default {
