@@ -8,10 +8,7 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   state: {
     draft: {
-      location: {
-        lat: null,
-        lng: null
-      },
+      location: null,
       photos: [],
       comments: null
     }
