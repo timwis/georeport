@@ -1,7 +1,7 @@
 <template lang="pug" functional>
-li.photo-preview
-  img(:src='props.url', :alt='props.name')
-  button.close-button(@click.prevent='listeners.remove') X
+  li.photo-preview
+    img(:src='props.url', :alt='props.name')
+    button.close-button(@click.prevent='listeners.remove') X
 </template>
 
 <style lang="sass">

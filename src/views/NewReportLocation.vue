@@ -1,5 +1,5 @@
 <template lang="pug">
-MapLocator#map(@save='onSave' :location='location')
+  MapLocator#map(@save='onSave' :location='location')
 </template>
 
 <script>

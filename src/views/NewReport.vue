@@ -1,33 +1,33 @@
 <template lang="pug">
-div.row.columns
-  form(@submit.prevent='onSubmit')
-    label(for='location') Location
-    router-link#location(to='/new/location')
-      MapThumbnail(required :location='location')
+  div.row.columns
+    form(@submit.prevent='onSubmit')
+      label(for='location') Location
+      router-link#location(to='/new/location')
+        MapThumbnail(required :location='location')
 
-    label(for='photo') Photo
-    FileInput#photo(
-      icon='camera'
-      @change='onFileChange'
-    ) Add photo
+      label(for='photo') Photo
+      FileInput#photo(
+        icon='camera'
+        @change='onFileChange'
+      ) Add photo
 
-    ul.previews
-      PhotoUploadPreview(
-        v-for='photo, index in photos'
-        :url='photo.url'
-        :name='photo.name'
-        @remove='removePhoto(index)'
+      ul.previews
+        PhotoUploadPreview(
+          v-for='photo, index in photos'
+          :url='photo.url'
+          :name='photo.name'
+          @remove='removePhoto(index)'
+        )
+
+      label(for='comments') Comments
+      input#comments(
+        name='comments'
+        type='text'
+        v-model='comments'
+        required
       )
 
-    label(for='comments') Comments
-    input#comments(
-      name='comments'
-      type='text'
-      v-model='comments'
-      required
-    )
-
-    button.button.full-width(type='submit') Submit
+      button.button.full-width(type='submit') Submit
 </template>
 
 <script>

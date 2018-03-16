@@ -1,16 +1,16 @@
 <template lang="pug">
-div.map-thumbnail-container
-  div.map-thumbnail(ref='mapThumbnail')
-  input(
-    name='lat'
-    :required='required'
-    :value='location.lat'
-  )
-  input(
-    name='lng'
-    :required='required'
-    :value='location.lng'
-  )
+  div.map-thumbnail-container
+    div.map-thumbnail(ref='mapThumbnail')
+    input(
+      name='lat'
+      :required='required'
+      :value='location.lat'
+    )
+    input(
+      name='lng'
+      :required='required'
+      :value='location.lng'
+    )
 </template>
 
 <script>

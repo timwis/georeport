@@ -1,5 +1,5 @@
 <template lang="pug">
-div.crosshairs
+  div.crosshairs
 </template>
 
 <script>
