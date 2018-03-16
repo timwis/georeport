@@ -1,70 +1,75 @@
 <template lang="pug">
-  div.crosshairs
+  LMap.crosshairs(
+    :zoom='defaultZoom'
+    :center='location || defaultLocation'
+    ref='map'
+    @locationfound='onLocationFound'
+  )
+    LTileLayer(
+      :url='basemap'
+      :tile-layer-class="esriTileLayer"
+    )
+    LTileLayer(
+      :url='labels'
+      :tile-layer-class="esriTileLayer"
+    )
+    LCircleMarker(
+      v-if='userLocation'
+      :lat-lng='userLocation'
+    )
+    EasyButton(
+      contents='<span>Save Location</span>'
+      position='topright'
+      @click='onClickSave'
+    )
 </template>
 
 <script>
-import L from 'leaflet'
-import * as esri from 'esri-leaflet'
-import 'leaflet-easybutton'
+import { LMap, LTileLayer, LCircleMarker } from 'vue2-leaflet'
+import { tiledMapLayer as EsriTileLayer } from 'esri-leaflet'
+import EasyButton from './EasyButton'
 
 export default {
-  props: [
-    'location'
-  ],
+  components: {
+    LMap,
+    LTileLayer,
+    LCircleMarker,
+    EasyButton
+  },
+  props: {
+    location: Object
+  },
   data () {
     return {
-      defaultLocation: [39.9523893, -75.1636291]
+      defaultZoom: 13,
+      defaultLocation: [39.9523893, -75.1636291],
+      userLocation: null,
+      basemap: 'https://tiles.arcgis.com/tiles/fLeGjb7u4uXqeF9q/arcgis/rest/services/CityBasemap/MapServer',
+      labels: 'https://tiles.arcgis.com/tiles/fLeGjb7u4uXqeF9q/arcgis/rest/services/CityBasemap_Labels/MapServer',
+      esriTileLayer: (url, options) => EsriTileLayer({ url, ...options })
     }
   },
   mounted () {
-    const map = this.initMap()
-    this.addBasemap(map)
-    this.addSaveButton(map)
-    this.zoomToUserLocation(map)
-    this.bindEvents(map)
+    const map = this.$refs.map.mapObject
+    map.locate({
+      enableHighAccuracy: true,
+      maximumAge: 60000
+    })
   },
   methods: {
-    initMap () {
-      const center = this.location || this.defaultLocation
-      return L.map(this.$el).setView(center, 20)
+    onClickSave () {
+      const center = this.$refs.map.mapObject.getCenter()
+      this.$emit('save', center)
     },
-    addBasemap (map) {
-      esri.tiledMapLayer({
-        url: 'https://tiles.arcgis.com/tiles/fLeGjb7u4uXqeF9q/arcgis/rest/services/CityBasemap/MapServer',
-        maxZoom: 20
-      }).addTo(map)
-
-      esri.tiledMapLayer({
-        url: 'https://tiles.arcgis.com/tiles/fLeGjb7u4uXqeF9q/arcgis/rest/services/CityBasemap_Labels/MapServer',
-        maxZoom: 20
-      }).addTo(map)
-    },
-    addSaveButton (map) {
-      const contents = `<span>Save Location</span>`
-      const callback = () => this.$emit('save', map.getCenter())
-      const opts = { position: 'topright', id: 'save-button' }
-      L.easyButton(contents, callback, opts).addTo(map)
-    },
-    zoomToUserLocation (map) {
-      map.locate({
-        enableHighAccuracy: true,
-        maximumAge: 60000
-      })
-      map.on('locationfound', (evt) => {
-        map.setView(evt.latlng, 20)
-        // const radius = evt.accuracy / 2
-        L.circle(evt.latlng, 1).addTo(map)
-      })
-    },
-    bindEvents (map) {
-      map.on('moveend', (evt) => this.$emit('moveend', evt))
+    onLocationFound (event) {
+      this.userLocation = event.latlng
     }
   }
 }
 </script>
 
 <style lang="sass">
-@import '~leaflet/dist/leaflet.css'
+@import "~leaflet/dist/leaflet.css"
 
 .crosshairs
   &:before, &:after
