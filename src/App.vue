@@ -20,6 +20,6 @@ export default {
 }
 </script>
 
-<style src="../node_modules/phila-standards/dist/css/phila-app.min.css"></style>
 <style lang="sass">
+@import '~phila-standards/src/sass/phila-app'
 </style>
