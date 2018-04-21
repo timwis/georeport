@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import Home from '../views/Home'
-import NewReport from '../views/NewReport'
-import NewReportLocation from '../views/NewReportLocation'
+import Home from '../pages/Home'
+import NewReport from '../pages/NewReport'
+import NewReportLocation from '../pages/NewReportLocation'
 
 Vue.use(VueRouter)
 
