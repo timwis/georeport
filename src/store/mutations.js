@@ -13,6 +13,5 @@ export function REMOVE_PHOTO (state, index) {
 }
 
 export function SET_LOCATION (state, location) {
-  state.draft.location.lat = location.lat
-  state.draft.location.lng = location.lng
+  state.draft.location = location
 }

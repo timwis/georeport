@@ -2,14 +2,9 @@
   div.map-thumbnail-container
     div.map-thumbnail(ref='mapThumbnail')
     input(
-      name='lat'
+      name='location'
       :required='required'
-      :value='location.lat'
-    )
-    input(
-      name='lng'
-      :required='required'
-      :value='location.lng'
+      :value='location'
     )
 </template>
 
@@ -23,7 +18,7 @@ export default {
     location: { type: Object, default: {} }
   },
   mounted () {
-    if (this.location && this.location.lat && this.location.lng) {
+    if (this.location) {
       const map = this.initMap(this.location)
       this.addBasemap(map)
     }
