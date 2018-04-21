@@ -1,11 +1,11 @@
 <template>
+  <div/>
 </template>
 
 <script>
 import omit from 'lodash/omit'
 import L from 'leaflet'
 import 'leaflet-easybutton'
-import propsBinder from 'vue2-leaflet/src/utils/propsBinder'
 
 export default {
   props: {

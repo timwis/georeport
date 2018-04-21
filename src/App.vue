@@ -1,19 +1,14 @@
-<template lang="pug">
-  div#application
-    SiteHeader
-    router-view
+<template>
+  <div id="application">
+    <SiteHeader title="GeoReport"/>
+    <router-view/>
+  </div>
 </template>
 
 <script>
 import SiteHeader from './components/SiteHeader'
 
 export default {
-  name: 'app',
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
-    }
-  },
   components: {
     SiteHeader
   }

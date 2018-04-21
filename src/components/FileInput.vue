@@ -1,18 +1,27 @@
-<template lang="pug">
-  div
-    label.button.icon.full-width(:for='id')
-      div.valign
-        i.fa.valign-cell
-          icon(:name='icon' scale=2)
-        div.button-label.valign-cell
-          slot
-    input.show-for-sr(
-      :id='id'
-      :name='id'
-      type='file'
-      @change='onChange'
-      :required='required'
-    )
+<template>
+  <div>
+    <label
+      :for="id"
+      class="button icon full-width">
+      <div class="valign">
+        <i class="fa valign-cell">
+          <icon
+            :name="icon"
+            scale="2"/>
+        </i>
+        <div class="button-label valign-cell">
+          <slot/>
+        </div>
+      </div>
+    </label>
+    <input
+      :id="id"
+      :name="id"
+      :required="required"
+      type="file"
+      class="show-for-sr"
+      @change="onChange"/>
+  </div>
 </template>
 
 <script>

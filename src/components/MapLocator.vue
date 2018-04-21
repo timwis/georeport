@@ -1,27 +1,24 @@
-<template lang="pug">
-  LMap.crosshairs(
-    :zoom='defaultZoom'
-    :center='location || defaultLocation'
-    ref='map'
-    @locationfound='onLocationFound'
-  )
-    LTileLayer(
-      :url='basemap'
-      :tile-layer-class="esriTileLayer"
-    )
-    LTileLayer(
-      :url='labels'
-      :tile-layer-class="esriTileLayer"
-    )
-    LCircleMarker(
-      v-if='userLocation'
-      :lat-lng='userLocation'
-    )
-    EasyButton(
-      contents='<span>Save Location</span>'
-      position='topright'
-      @click='onClickSave'
-    )
+<template>
+  <LMap
+    :zoom="defaultZoom"
+    :center="location || defaultLocation"
+    ref="map"
+    class="crosshairs"
+    @locationfound="onLocationFound">
+    <LTileLayer
+      :url="basemap"
+      :tile-layer-class="esriTileLayer"/>
+    <LTileLayer
+      :url="labels"
+      :tile-layer-class="esriTileLayer"/>
+    <LCircleMarker
+      v-if="userLocation"
+      :lat-lng="userLocation"/>
+    <EasyButton
+      contents="<span>Save Location</span>"
+      position="topright"
+      @click="onClickSave"/>
+  </LMap>
 </template>
 
 <script>

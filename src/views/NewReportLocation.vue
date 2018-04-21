@@ -1,5 +1,8 @@
-<template lang="pug">
-  MapLocator#map(@save='onSave' :location='location')
+<template>
+  <MapLocator
+    :location="location"
+    id="map"
+    @save="onSave"/>
 </template>
 
 <script>

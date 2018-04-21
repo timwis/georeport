@@ -1,11 +1,13 @@
-<template lang="pug">
-  div.map-thumbnail-container
-    div.map-thumbnail(ref='mapThumbnail')
-    input(
-      name='location'
-      :required='required'
-      :value='location'
-    )
+<template>
+  <div class="map-thumbnail-container">
+    <div
+      ref="mapThumbnail"
+      class="map-thumbnail"/>
+    <input
+      :value="location"
+      :required="required"
+      name="location"/>
+  </div>
 </template>
 
 <script>
@@ -15,7 +17,7 @@ import * as esri from 'esri-leaflet'
 export default {
   props: {
     required: { type: Boolean },
-    location: { type: Object, default: {} }
+    location: { type: Object, default: () => {} }
   },
   mounted () {
     if (this.location) {
