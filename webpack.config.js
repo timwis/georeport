@@ -1,6 +1,5 @@
 var path = require('path')
 var webpack = require('webpack')
-var DashboardPlugin = require('webpack-dashboard/plugin')
 
 module.exports = {
   entry: './src/main.js',
@@ -101,9 +100,5 @@ if (process.env.NODE_ENV === 'production') {
     new webpack.LoaderOptionsPlugin({
       minimize: true
     })
-  ])
-} else {
-  module.exports.plugins = (module.exports.plugins || []).concat([
-    new DashboardPlugin()
   ])
 }
