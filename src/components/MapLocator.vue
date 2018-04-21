@@ -29,6 +29,9 @@ import { LMap, LTileLayer, LCircleMarker } from 'vue2-leaflet'
 import { tiledMapLayer as EsriTileLayer } from 'esri-leaflet'
 import EasyButton from './EasyButton'
 
+const TILES_BASEMAP = process.env.VUE_APP_TILES_BASEMAP
+const TILES_LABELS = process.env.VUE_APP_TILES_LABELS
+
 export default {
   components: {
     LMap,
@@ -44,8 +47,8 @@ export default {
       defaultZoom: 13,
       defaultLocation: [39.9523893, -75.1636291],
       userLocation: null,
-      basemap: 'https://tiles.arcgis.com/tiles/fLeGjb7u4uXqeF9q/arcgis/rest/services/CityBasemap/MapServer',
-      labels: 'https://tiles.arcgis.com/tiles/fLeGjb7u4uXqeF9q/arcgis/rest/services/CityBasemap_Labels/MapServer',
+      basemap: TILES_BASEMAP,
+      labels: TILES_LABELS,
       esriTileLayer: (url, options) => EsriTileLayer({ url, ...options })
     }
   },
