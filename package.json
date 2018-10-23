@@ -14,13 +14,13 @@
     "esri-leaflet": "^2.1.1",
     "leaflet-easybutton": "^2.2.4",
     "lodash": "^4.17.5",
-    "phila-standards": "^0.11.2",
+    "phila-standards": "^1.0.2",
     "register-service-worker": "^1.0.0",
+    "vue": "^2.5.17",
     "vue-awesome": "^2.3.4",
     "vue-router": "^3.0.1",
     "vue2-leaflet": "^1.0.2",
-    "vuex": "^3.0.1",
-    "vue": "^2.5.17"
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.5",
