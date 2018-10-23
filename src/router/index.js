@@ -14,14 +14,16 @@ const routes = [
     component: Home
   },
   {
-    path: '/new',
+    path: '/new/:reportType',
     name: 'NewReport',
-    component: NewReport
+    component: NewReport,
+    props: true
   },
   {
-    path: '/new/location',
+    path: '/new/:reportType/location',
     name: 'NewReportLocation',
-    component: NewReportLocation
+    component: NewReportLocation,
+    props: true
   }
 ]
 

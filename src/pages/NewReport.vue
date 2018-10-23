@@ -4,7 +4,7 @@
       <label for="location">Location</label>
       <router-link
         id="location"
-        to="/new/location">
+        :to="`/new/${reportType}/location`">
         <MapThumbnail
           :location="location"
           required/>
@@ -27,12 +27,10 @@
           @remove="removePhoto(index)"/>
       </ul>
 
-      <label for="comments">Comments</label>
-      <input
-        v-model="comments"
-        id="comments"
-        type="text"
-        required/>
+      <VueFormGenerator
+        :model="customFields"
+        :schema="schema"
+        @model-updated="updateCustomField"/>
 
       <button
         type="submit"
@@ -45,30 +43,43 @@
 
 <script>
 import { mapState, mapMutations } from 'vuex'
+import VueFormGenerator from 'vue-form-generator/dist/vfg-core'
 
 import MapThumbnail from '../components/MapThumbnail'
 import FileInput from '../components/FileInput'
 import PhotoUploadPreview from '../components/PhotoUploadPreview'
+import GraffitiSchema from '../schemas/graffiti'
+
+const schemas = {
+  graffiti: GraffitiSchema
+}
 
 export default {
+  props: {
+    reportType: {
+      type: String,
+      required: true
+    }
+  },
+  data () {
+    return {
+      customFields: Object.assign({}, this.$store.state.draft.customFields)
+    }
+  },
   computed: {
     ...mapState({
       photos: (state) => state.draft.photos,
       location: (state) => state.draft.location
     }),
-    comments: {
-      get () {
-        return this.$store.state.draft.comments
-      },
-      set (value) {
-        this.$store.commit('SET_COMMENTS', value)
-      }
+    schema () {
+      return schemas[this.reportType]
     }
   },
   components: {
     MapThumbnail,
     FileInput,
-    PhotoUploadPreview
+    PhotoUploadPreview,
+    VueFormGenerator: VueFormGenerator.component
   },
   methods: {
     onFileChange (evt) {
@@ -86,21 +97,48 @@ export default {
       }
       reader.readAsDataURL(file)
     },
-    onRemovePhoto (evt) {
-      console.log('remove photo', evt)
-    },
     onSubmit (evt) {
       console.log('submitted')
     },
     ...mapMutations({
-      removePhoto: 'REMOVE_PHOTO'
-    })
+      removePhoto: 'REMOVE_PHOTO',
+      setCustomField: 'SET_CUSTOM_FIELD'
+    }),
+    updateCustomField (value, field) {
+      this.setCustomField({ field, value })
+    }
   }
 }
 </script>
 
-<style lang="sass" scoped>
+<style lang="sass">
 .previews
   list-style-type: none
   margin: 0
+
+input[type=radio]
+  appearance: none
+  display: inline
+
+  &:before
+    display: inline-block
+    padding-right: 10px
+    content: ""
+    font-family: FontAwesome
+
+  &:checked:before
+    content: ""
+
+input[type=checkbox]
+  appearance: none
+  display: inline
+
+  &:before
+    display: inline-block
+    padding-right: 10px
+    content: ""
+    font-family: FontAwesome
+
+  &:checked:before
+    content: ""
 </style>

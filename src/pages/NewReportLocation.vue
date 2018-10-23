@@ -11,6 +11,12 @@ import { mapState, mapMutations } from 'vuex'
 import MapLocator from '../components/MapLocator'
 
 export default {
+  props: {
+    reportType: {
+      type: String,
+      required: true
+    }
+  },
   computed: {
     ...mapState({
       location: (state) => state.draft.location
@@ -22,7 +28,7 @@ export default {
   methods: {
     onSave (location) {
       this.setLocation(location)
-      this.$router.push('/new')
+      this.$router.push(`/new/${this.reportType}`)
     },
     ...mapMutations({
       setLocation: 'SET_LOCATION'

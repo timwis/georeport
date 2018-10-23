@@ -15,3 +15,7 @@ export function REMOVE_PHOTO (state, index) {
 export function SET_LOCATION (state, location) {
   state.draft.location = location
 }
+
+export function SET_CUSTOM_FIELD (state, { field, value }) {
+  state.draft.customFields[field] = value
+}
