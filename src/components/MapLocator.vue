@@ -24,10 +24,8 @@
 <script>
 import { LMap, LTileLayer, LCircleMarker } from 'vue2-leaflet'
 import { tiledMapLayer as EsriTileLayer } from 'esri-leaflet'
+import { TILES_BASEMAP, TILES_LABELS } from '../config'
 import EasyButton from './EasyButton'
-
-const TILES_BASEMAP = process.env.VUE_APP_TILES_BASEMAP
-const TILES_LABELS = process.env.VUE_APP_TILES_LABELS
 
 export default {
   components: {

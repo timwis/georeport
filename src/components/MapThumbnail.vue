@@ -13,6 +13,7 @@
 <script>
 import L from 'leaflet'
 import * as esri from 'esri-leaflet'
+import { TILES_BASEMAP, TILES_LABELS } from '../config'
 
 export default {
   props: {
@@ -43,12 +44,12 @@ export default {
     },
     addBasemap (map) {
       esri.tiledMapLayer({
-        url: 'https://tiles.arcgis.com/tiles/fLeGjb7u4uXqeF9q/arcgis/rest/services/CityBasemap/MapServer',
+        url: TILES_BASEMAP,
         maxZoom: 20
       }).addTo(map)
 
       esri.tiledMapLayer({
-        url: 'https://tiles.arcgis.com/tiles/fLeGjb7u4uXqeF9q/arcgis/rest/services/CityBasemap_Labels/MapServer',
+        url: TILES_LABELS,
         maxZoom: 20
       }).addTo(map)
     }
