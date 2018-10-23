@@ -2,8 +2,9 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import Home from '../pages/Home'
-import NewReport from '../pages/NewReport'
-import NewReportLocation from '../pages/NewReportLocation'
+import SelectCategory from '../pages/SelectCategory'
+import SelectLocation from '../pages/SelectLocation'
+import ReportForm from '../pages/ReportForm'
 
 Vue.use(VueRouter)
 
@@ -15,13 +16,18 @@ const routes = [
   },
   {
     path: '/new',
-    name: 'NewReport',
-    component: NewReport
+    name: 'SelectCategory',
+    component: SelectCategory
   },
   {
     path: '/new/location',
-    name: 'NewReportLocation',
-    component: NewReportLocation
+    name: 'SelectLocation',
+    component: SelectLocation
+  },
+  {
+    path: '/new/:category',
+    name: 'ReportForm',
+    component: ReportForm
   }
 ]
 

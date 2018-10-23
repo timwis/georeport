@@ -22,7 +22,7 @@ export default {
   methods: {
     onSave (location) {
       this.setLocation(location)
-      this.$router.push('/new')
+      this.$router.go(-1)
     },
     ...mapMutations({
       setLocation: 'SET_LOCATION'
